@@ -1,19 +1,20 @@
 name: publish
 
 on: 
-  push:
-    branches:
-      - master
-      - releases/v*
-    paths-ignore:
-      - "**.md"
-      - ".github/workflows/sync-readme.yml"
-      - "LICENSE"
-  pull_request:
-    paths-ignore:
-      - "**.md"
-      - ".github/workflows/sync-readme.yml"
-      - "LICENSE"
+    workflow_dispatch:
+#   push:
+#     branches:
+#       - master
+#       - releases/v*
+#     paths-ignore:
+#       - "**.md"
+#       - ".github/workflows/sync-readme.yml"
+#       - "LICENSE"
+#   pull_request:
+#     paths-ignore:
+#       - "**.md"
+#       - ".github/workflows/sync-readme.yml"
+#       - "LICENSE"
 
 env:
     GLIBC_VERSION: 2.32-r0
