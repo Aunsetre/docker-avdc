@@ -82,4 +82,4 @@ jobs:
               BUILD_DATE=$(date +"%Y-%m-%d")
               VERSION=${{ env.VERSION }}
             tags: |
-              vergilgao/avdc:${{ env.VERSION }}
+              aunsetre/avdc:${{ env.VERSION }}
