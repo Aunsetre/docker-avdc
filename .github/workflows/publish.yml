@@ -74,7 +74,7 @@ jobs:
           with:
             context: .
             file: Dockerfile
-            platforms: linux/arm64
+            platforms: linux/amd64
             push: true
             build-args: |
               GLIBC_VERSION=${{ env.GLIBC_VERSION }}
