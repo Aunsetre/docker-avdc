@@ -16,8 +16,8 @@ on:
       - "LICENSE"
 
 env:
-    AVDC_VERSION: 3.9.2
-    VERSION: 3.9.2
+    AVDC_VERSION: 4.0.2
+    VERSION: 4.0.2
 
 jobs:
     build:
