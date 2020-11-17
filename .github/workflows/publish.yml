@@ -46,7 +46,7 @@ jobs:
               -e SUCCESS_OUTPUT="test_output" \
               -e DEBUG=1 \
               -v ${PWD}/Test:/app/data \
-              vergilgao/avdc:test
+              aunsetre/avdc:test
             find . -name MIFD-046.mp4
         - name: Set up QEMU
           uses: docker/setup-qemu-action@v1
