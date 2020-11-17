@@ -1,24 +1,24 @@
 name: publish
 
 on: 
-    workflow_dispatch:
-#   push:
-#     branches:
-#       - master
-#       - releases/v*
-#     paths-ignore:
-#       - "**.md"
-#       - ".github/workflows/sync-readme.yml"
-#       - "LICENSE"
-#   pull_request:
-#     paths-ignore:
-#       - "**.md"
-#       - ".github/workflows/sync-readme.yml"
-#       - "LICENSE"
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+      - releases/v*
+    paths-ignore:
+      - "**.md"
+      - ".github/workflows/sync-readme.yml"
+      - "LICENSE"
+  pull_request:
+    paths-ignore:
+      - "**.md"
+      - ".github/workflows/sync-readme.yml"
+      - "LICENSE"
 
 env:
-    AVDC_VERSION: 4.0.2
-    VERSION: 4.0.2
+    AVDC_VERSION: 3.9.2
+    VERSION: 3.9.2
 
 jobs:
     build:
@@ -32,15 +32,13 @@ jobs:
             sudo groupadd -g 1024 avdc
             sudo useradd -u 1024 avdc -g avdc
             sudo chown -R 1024:1024 Test
-
-        - name: Build the Docker image
+        - name: Build the test image
           run: |
-            docker build -t aunsetre/avdc:${{ env.VERSION }} \
+            docker build -t aunsetre/avdc:test \
               --build-arg AVDC_VERSION=${{ env.AVDC_VERSION }} \
               --build-arg BUILD_DATE=$(date +"%Y-%m-%d") \
               --build-arg VERSION=${{ env.VERSION }} \
               .  
-
         - name: Run the Test
           if: success()
           run: |
@@ -48,9 +46,8 @@ jobs:
               -e SUCCESS_OUTPUT="test_output" \
               -e DEBUG=1 \
               -v ${PWD}/Test:/app/data \
-              xiaoyu/avdc:${{ env.VERSION }}
+              vergilgao/avdc:test
             find . -name MIFD-046.mp4
-
         - name: Set up QEMU
           uses: docker/setup-qemu-action@v1
           if: success()
@@ -75,9 +72,9 @@ jobs:
             platforms: linux/amd64,linux/arm64
             push: true
             build-args: |
-              GLIBC_VERSION=${{ env.GLIBC_VERSION }}
               AVDC_VERSION=${{ env.AVDC_VERSION }}
               BUILD_DATE=$(date +"%Y-%m-%d")
               VERSION=${{ env.VERSION }}
             tags: |
               aunsetre/avdc:${{ env.VERSION }}
+              aunsetre/avdc:latest
