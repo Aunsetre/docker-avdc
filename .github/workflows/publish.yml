@@ -35,8 +35,7 @@ jobs:
 
         - name: Build the Docker image
           run: |
-            docker build -t xiaoyu/avdc:${{ env.VERSION }} \
-              --build-arg GLIBC_VERSION=${{ env.GLIBC_VERSION }} \
+            docker build -t aunsetre/avdc:${{ env.VERSION }} \
               --build-arg AVDC_VERSION=${{ env.AVDC_VERSION }} \
               --build-arg BUILD_DATE=$(date +"%Y-%m-%d") \
               --build-arg VERSION=${{ env.VERSION }} \
