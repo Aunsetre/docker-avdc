@@ -2,7 +2,6 @@ FROM python:3.8-slim
 LABEL maintainer="VergilGao"
 
 # 软件包版本号
-ARG GLIBC_VERSION
 ARG AVDC_VERSION
 
 RUN \
@@ -15,7 +14,8 @@ RUN \
     cd .. && \
     rm -rf build && \
     cd /app && \
-    rm config.ini && \
+    sed -i '/pyinstaller/d' requirements.txt && \
+    cat requirements.txt && \
     pip install --no-cache-dir -r requirements.txt && \
     apt-get purge -y wget
 
