@@ -21,37 +21,42 @@ cd /app
 cat>config.ini<<EOF
 [common]
 main_mode=1
-failed_output_folder=data/${FAILED_OUTPUT}
-success_output_folder=data/${SUCCESS_OUTPUT}
-soft_link=${SOFT_LINK}
-failed_move=${FAILED_MOVE}
-auto_exit=1
-transalte_to_sc=${TRANSLATE}
+failed_output_folder=failed
+success_output_folder=output
+soft_link=0
+failed_move=1
+auto_exit=0
+transalte_to_sc=1
 
 [proxy]
-;proxytype: http or socks5 or socks5h
-type=${PROXY_TYPE}
-proxy=${PROXY_URI}
-timeout=${TIMEOUT}
-retry=${RETRY}
+;proxytype: http or socks5 or socks5h switch: 0 1
+switch=0
+type=http
+proxy=192.168.1.1:1080
+timeout=5
+retry=3
 
 [Name_Rule]
-location_rule=${LOCATION_RULE}
-naming_rule=${NAMING_RULE}
-max_title_len=${MAX_TITLE_LEN}
+location_rule=actor+'/'+number
+naming_rule=number+'-'+title
+max_title_len= 50
 
 [update]
-update_check=0
+update_check=1
 
 [priority]
-website=${PRIORITY_WEBSITE}
+website=javbus,javdb,fanza,xcity,mgstage,fc2,avsox,jav321,javlib,dlsite
 
 [escape]
 literals=\()/
-folders=${ESCAPE_FOLDERS}
+folders=failed,output
 
 [debug_mode]
-switch=${DEBUG}
+switch=0
+
+[transalte]
+switch=0
+values=title,outline
 EOF
 
 exec python AV_Data_Capture.py
