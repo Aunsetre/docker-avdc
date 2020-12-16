@@ -14,9 +14,11 @@ RUN \
     cd .. && \
     rm -rf build && \
     cd /app && \
-    sed -i '/pyinstaller/d' requirements.txt && \
+    #sed -i '/pyinstaller/d' requirements.txt && \
+    pip install pyinstaller \
     cat requirements.txt && \
-    pip install --no-cache-dir -r requirements.txt && \
+    pyinstaller --onefile AV_Data_Capture.py  --hidden-import ADC_function.py --hidden-import core.py \
+    #pip install --no-cache-dir -r requirements.txt && \
     apt-get purge -y wget
 
 VOLUME /app/data
